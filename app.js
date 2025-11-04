@@ -1,119 +1,182 @@
-// // patratul polibius
+import {
+  eliminaDuplicateSiCombinaIJ,
+  construirePatratPolibiusCompletatCuCheie,
+  eliminaLitereleDinCheie,
+  litereAlfabet,
+  construirePatratPolibius,
+} from "./polibius.js";
+import { cleanString } from "./functions.js";
+import { explicatiiPolibius } from "./explicatii.js";
 
-// const cheie = "SECRETSIGUR";
-// const textClar = "EXEMPLU";
+export let cheie = "";
+export let textInClar = "";
+export let cheieSanetizata = "";
+export let textInClarSanetizat = "";
+export let cheiePrelucrata = "";
 
-// const litereAlfabet = [
-//   "A",
-//   "B",
-//   "C",
-//   "D",
-//   "E",
-//   "F",
-//   "G",
-//   "H",
-//   "I/J",
-//   "K",
-//   "L",
-//   "M",
-//   "N",
-//   "O",
-//   "P",
-//   "Q",
-//   "R",
-//   "S",
-//   "T",
-//   "U",
-//   "V",
-//   "W",
-//   "X",
-//   "Y",
-//   "Z",
-// ];
+// POLIBIUS
+let selectTabelPolibius = document.querySelector("#polibius");
+const selectCriptareCheie = document.querySelector("#criptareCheie");
+const selectCriptareTextClar = document.querySelector("#criptareTextClar");
+const btnPolibiusCripteaza = document.querySelector("#polibius-cripteaza");
+const containerPolibiusData = document.querySelector(".polibius-data");
 
-// const patratPolibius = [
-//   [0, 1, 2, 3, 4, 5],
-//   [1, "-", "-", "-", "-", "-"],
-//   [2, "-", "-", "-", "-", "-"],
-//   [3, "-", "-", "-", "-", "-"],
-//   [4, "-", "-", "-", "-", "-"],
-//   [5, "-", "-", "-", "-", "-"],
-// ];
+// patrat polibius utilizat in criptare
+const patratPolibius = [
+  [0, 1, 2, 3, 4, 5],
+  [1, "-", "-", "-", "-", "-"],
+  [2, "-", "-", "-", "-", "-"],
+  [3, "-", "-", "-", "-", "-"],
+  [4, "-", "-", "-", "-", "-"],
+  [5, "-", "-", "-", "-", "-"],
+];
 
-// // console.log(patratPolibius);
+// se utilizeaza doar pentru randarea in explicatie
+let patratPolibiusCheie = [
+  [0, 1, 2, 3, 4, 5],
+  [1, "-", "-", "-", "-", "-"],
+  [2, "-", "-", "-", "-", "-"],
+  [3, "-", "-", "-", "-", "-"],
+  [4, "-", "-", "-", "-", "-"],
+  [5, "-", "-", "-", "-", "-"],
+];
 
-// // // stergem literele duplicate din cheie
-// // const cheieFaraLitereDuplicate = new Set(cheie);
+// --- FUNCTII ---
+function randarePatratPolibius(selectTabelPolibius) {
+  if (selectTabelPolibius !== null) {
+    selectTabelPolibius.innerHTML = "";
 
-// // const newArr = Array.from(cheieFaraLitereDuplicate).map((litera) => {
-// //   if (litera === "I" || litera === "J") {
-// //     return "I/J";
-// //   }
-// //   return litera;
-// // });
+    // loop randuri
+    for (let i = 0; i < patratPolibius.length; i++) {
+      const row = document.createElement("tr");
 
-// function eliminaDuplicateSiCombinaIJ(cheie) {
-//   // Convertim cheia la uppercase
-//   const upper = cheie.toUpperCase();
+      // loop intre coloane pe randul curent
+      for (let j = 0; j < patratPolibius[i].length; j++) {
+        const cell = document.createElement("td");
+        cell.textContent = patratPolibius[i][j];
+        row.appendChild(cell);
+      }
 
-//   // Eliminam orice caracter care nu e litera A-Z
-//   const doarLitere = upper.replace(/[^A-Z]/g, "");
+      selectTabelPolibius.appendChild(row);
+    }
+  }
+}
+// ---
 
-//   // Eliminam duplicatele
-//   const cheieFaraDuplicate = new Set(doarLitere);
+// randarea patratului Polibius fara nici o valoare
+randarePatratPolibius(selectTabelPolibius);
+// if (selectTabelPolibius !== null) {
+//   selectTabelPolibius.innerHTML = "";
 
-//   // Convertim in array si combinam I/J
-//   const rezultat = Array.from(cheieFaraDuplicate).map((litera) => {
-//     if (litera === "I" || litera === "J") {
-//       return "I/J";
+//   // loop randuri
+//   for (let i = 0; i < patratPolibius.length; i++) {
+//     const row = document.createElement("tr");
+
+//     // loop intre coloane pe randul curent
+//     for (let j = 0; j < patratPolibius[i].length; j++) {
+//       const cell = document.createElement("td");
+//       cell.textContent = patratPolibius[i][j];
+//       row.appendChild(cell);
 //     }
-//     return litera;
-//   });
 
-//   return rezultat;
-// }
-
-// function eliminaLitereleDinCheie(litereAlfabet, cheiePrelucrata) {
-//   return litereAlfabet.filter((litera) => {
-//     if (cheiePrelucrata.includes(litera)) {
-//       // Daca cheiePrelucrata contine litera atunci o exclude,
-//       return false;
-//     } else {
-//       // Daca nu atunci o pastram
-//       return true;
-//     }
-//   });
-// }
-
-// // Prelucram cheia pentru a elimina duplicatele si consideram I/J ca fiind aceeasi litera
-// const cheiePrelucrata = eliminaDuplicateSiCombinaIJ(cheie);
-
-// const alfabetFaraCheie = eliminaLitereleDinCheie(
-//   litereAlfabet,
-//   cheiePrelucrata
-// );
-
-// console.log(cheiePrelucrata);
-
-// let indexCheie = 0;
-// let indexAlfabet = 0;
-// // constructia linilor
-// for (let i = 1; i <= 5; i++) {
-//   console.log(`-- Linia ${i} --`);
-//   // constructia coloanelor
-//   for (let j = 1; j <= 5; j++) {
-//     if (indexCheie < cheiePrelucrata.length) {
-//       console.log(`Coloana ${cheiePrelucrata[indexCheie]}`);
-//       patratPolibius[i][j] = cheiePrelucrata[indexCheie];
-//       indexCheie++;
-//     } else {
-//       console.log(`Coloana ${alfabetFaraCheie[indexAlfabet]}`);
-//       patratPolibius[i][j] = alfabetFaraCheie[indexAlfabet];
-//       indexAlfabet++;
-//     }
+//     selectTabelPolibius.appendChild(row);
 //   }
 // }
 
-// console.log(patratPolibius);
+// apelam addEventListener doar daca btnPolibiusCripteaza nu e null sau undefined
+btnPolibiusCripteaza?.addEventListener("click", () => {
+  cheie = selectCriptareCheie.value;
+  textInClar = selectCriptareTextClar.value;
 
-// console.log("Alfabet fara cheie: ", alfabetFaraCheie);
+  if (cheie === "" || textInClar === "") {
+    alert("Te rog completeaza campul Cheie si Text in clar");
+    return [];
+  }
+
+  // sanetizam datele de intrare sa contina numai litere majuscule
+  cheieSanetizata = cleanString(cheie);
+  textInClarSanetizat = cleanString(textInClar);
+
+  // prelucram cheia pentru a elimina duplicatele si combinam I cu J
+  cheiePrelucrata = eliminaDuplicateSiCombinaIJ(cheieSanetizata);
+
+  // din alfabet eliminam toate literele care sunt existente in cheie
+  const alfabetFaraCheie = eliminaLitereleDinCheie(
+    litereAlfabet,
+    cheiePrelucrata
+  );
+
+  // completam patratul polibius cu cheia si restul literelor alfabetului
+  construirePatratPolibius(cheiePrelucrata, alfabetFaraCheie, patratPolibius);
+
+  // randarea noului patrat Polibius
+  selectTabelPolibius = document.querySelector("#polibius");
+  randarePatratPolibius(selectTabelPolibius);
+  //   if (selectTabelPolibius !== null) {
+  //     selectTabelPolibius.innerHTML = "";
+
+  //     // loop randuri
+  //     for (let i = 0; i < patratPolibius.length; i++) {
+  //       const row = document.createElement("tr");
+
+  //       // loop intre coloane pe randul curent
+  //       for (let j = 0; j < patratPolibius[i].length; j++) {
+  //         const cell = document.createElement("td");
+  //         cell.textContent = patratPolibius[i][j];
+  //         row.appendChild(cell);
+  //       }
+
+  //       selectTabelPolibius.appendChild(row);
+  //     }
+  //   }
+
+  console.log(patratPolibius);
+
+  //explicatii pasi Polibius
+  const explicatiiExistente = document.querySelector(".explicatii");
+
+  if (explicatiiExistente) {
+    explicatiiExistente.remove();
+  }
+
+  containerPolibiusData.insertAdjacentHTML("afterend", explicatiiPolibius());
+  const selectTabelPolibiusCheie = document.querySelector("#polibius-cheie");
+
+  construirePatratPolibiusCompletatCuCheie(
+    cheiePrelucrata,
+    patratPolibiusCheie
+  );
+
+  // randarea patratului Polibius fara nici o valoare
+  if (selectTabelPolibiusCheie !== null) {
+    selectTabelPolibiusCheie.innerHTML = "";
+
+    // loop randuri
+    for (let i = 0; i < patratPolibiusCheie.length; i++) {
+      const row = document.createElement("tr");
+
+      // loop intre coloane pe randul curent
+      for (let j = 0; j < patratPolibiusCheie[i].length; j++) {
+        const cell = document.createElement("td");
+        cell.textContent = patratPolibiusCheie[i][j];
+        row.appendChild(cell);
+      }
+
+      selectTabelPolibiusCheie.appendChild(row);
+    }
+  }
+
+  // randarea patratului Polibius complet
+  const selectTabelPolibiusComplet =
+    document.querySelector("#polibius-complet");
+  randarePatratPolibius(selectTabelPolibiusComplet);
+
+  patratPolibiusCheie = [
+    [0, 1, 2, 3, 4, 5],
+    [1, "-", "-", "-", "-", "-"],
+    [2, "-", "-", "-", "-", "-"],
+    [3, "-", "-", "-", "-", "-"],
+    [4, "-", "-", "-", "-", "-"],
+    [5, "-", "-", "-", "-", "-"],
+  ];
+});

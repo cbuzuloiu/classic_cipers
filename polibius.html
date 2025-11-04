@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="title">
+      <h1>Cifrurile ADFGX și ADFGVX. Metode de criptanaliză</h1>
+    </section>
+    <section class="nav">
+      <button>Polibius</button>
+      <button>ADFGX</button>
+      <button>ADFGVX</button>
+    </section>
+    <section class="polibius-data">
+      <div class="container">
+        <div class="polibius-container">
+          <h2>Patratul Polibius:</h2>
+          <table id="polibius"></table>
+        </div>
+
+        <div>
+          <h2>Criptare:</h2>
+          <div class="form-container">
+            <div class="input-group">
+              <label for="criptareCheie">Cheie:</label>
+              <input
+                type="text"
+                id="criptareCheie"
+                name="criptareCheie"
+                placeholder="Adauga cheie de criptare"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="criptareTextClar">Text in clar:</label>
+              <input
+                type="text"
+                id="criptareTextClar"
+                name="criptareTextClar"
+                placeholder="Adauga textul ce va fi criptat"
+              />
+            </div>
+
+            <button id="polibius-cripteaza">Cripteaza</button>
+            <p><strong>Text criptat: </strong></p>
+          </div>
+        </div>
+
+        <div>
+          <h2>Decriptare:</h2>
+          <form class="form-container">
+            <div class="input-group">
+              <label for="decriptareCheie">Cheie:</label>
+              <input
+                type="text"
+                id="decriptareCheie"
+                name="decriptareCheie"
+                placeholder="Adauga cheie de criptare"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="decriptareTextClar">Text criptat:</label>
+              <input
+                type="text"
+                id="decriptareTextClar"
+                name="decriptareTextClar"
+                placeholder="Adauga textul ce va fi decriptat"
+              />
+            </div>
+            <button>Decripteaza:</button>
+            <p><strong>Text in clar: </strong></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
