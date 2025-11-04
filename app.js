@@ -4,8 +4,9 @@ import {
   eliminaLitereleDinCheie,
   litereAlfabet,
   construirePatratPolibius,
+  gasesteCoordonate,
 } from "./polibius.js";
-import { cleanString } from "./functions.js";
+import { cleanString, textCriptat } from "./functions.js";
 import { explicatiiPolibius } from "./explicatii.js";
 
 export let cheie = "";
@@ -20,6 +21,9 @@ const selectCriptareCheie = document.querySelector("#criptareCheie");
 const selectCriptareTextClar = document.querySelector("#criptareTextClar");
 const btnPolibiusCripteaza = document.querySelector("#polibius-cripteaza");
 const containerPolibiusData = document.querySelector(".polibius-data");
+const containerTextCriptatPolibius = document.querySelector(
+  ".text-criptat-polibius"
+);
 
 // patrat polibius utilizat in criptare
 const patratPolibius = [
@@ -132,6 +136,14 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
 
   console.log(patratPolibius);
 
+  // gasim coordonatele fiecarei litere si o criptam
+  const criptare = gasesteCoordonate(textInClarSanetizat, patratPolibius);
+  console.log(criptare);
+
+  const textCriptatPolibius = textCriptat(criptare);
+  console.log(textCriptatPolibius);
+  containerTextCriptatPolibius.textContent = textCriptatPolibius;
+
   //explicatii pasi Polibius
   const explicatiiExistente = document.querySelector(".explicatii");
 
@@ -170,6 +182,17 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
   const selectTabelPolibiusComplet =
     document.querySelector("#polibius-complet");
   randarePatratPolibius(selectTabelPolibiusComplet);
+
+  // etapa 5 - criptarea fiecarui caracter
+  const containerDateIesire = document.querySelector(".explicatii-polibius");
+  console.log(containerDateIesire);
+
+  for (let i = 0; i < textInClarSanetizat.length; i++) {
+    containerDateIesire.insertAdjacentHTML(
+      "beforeend",
+      `<p>Litera: ${textInClarSanetizat[i]} - Criptata in: ${criptare[i]}</p>`
+    );
+  }
 
   patratPolibiusCheie = [
     [0, 1, 2, 3, 4, 5],

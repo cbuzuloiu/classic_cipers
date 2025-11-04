@@ -139,6 +139,38 @@ export function construirePatratPolibiusCompletatCuCheie(
     }
   }
 }
+
+export function gasesteCoordonate(text, patrat) {
+  const rezultate = [];
+
+  for (const litera of text) {
+    let gasit = false;
+
+    // randuri coloane
+    for (let i = 1; i < patrat.length; i++) {
+      for (let j = 1; j < patrat[i].length; j++) {
+        const valoare = patrat[i][j];
+
+        // I/J
+        if (valoare === "I/J" && (litera === "I" || litera === "J")) {
+          rezultate.push([patrat[i][0], patrat[0][j]]);
+          gasit = true;
+          break;
+        }
+
+        if (valoare === litera) {
+          rezultate.push([patrat[i][0], patrat[0][j]]);
+          gasit = true;
+          break;
+        }
+      }
+
+      if (gasit) break;
+    }
+  }
+
+  return rezultate;
+}
 // construirePatratPolibius(cheiePrelucrata, alfabetFaraCheie);
 
 // console.log(patratPolibius);

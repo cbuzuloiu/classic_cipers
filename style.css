@@ -103,7 +103,18 @@ p {
 
 .date {
   display: flex;
+  flex-wrap: wrap; /* ✅ allow boxes to wrap on smaller widths */
   gap: 15px;
+  width: 100%;
+}
+
+.date-intrare,
+.date-iesire {
+  flex: 1 1 45%; /* ✅ let them share width and shrink if needed */
+  min-width: 250px; /* prevent too narrow columns */
+  word-wrap: break-word; /* ✅ allow long words to break */
+  overflow-wrap: break-word;
+  word-break: break-all; /* ✅ for very long strings like keys */
 }
 
 .explicatii,
