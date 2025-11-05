@@ -84,23 +84,6 @@ function randarePatratPolibius(selectTabelPolibius) {
 
 // randarea patratului Polibius fara nici o valoare
 randarePatratPolibius(selectTabelPolibius);
-// if (selectTabelPolibius !== null) {
-//   selectTabelPolibius.innerHTML = "";
-
-//   // loop randuri
-//   for (let i = 0; i < patratPolibius.length; i++) {
-//     const row = document.createElement("tr");
-
-//     // loop intre coloane pe randul curent
-//     for (let j = 0; j < patratPolibius[i].length; j++) {
-//       const cell = document.createElement("td");
-//       cell.textContent = patratPolibius[i][j];
-//       row.appendChild(cell);
-//     }
-
-//     selectTabelPolibius.appendChild(row);
-//   }
-// }
 
 // apelam addEventListener doar daca btnPolibiusCripteaza nu e null sau undefined
 btnPolibiusCripteaza?.addEventListener("click", () => {
@@ -131,33 +114,13 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
   // randarea noului patrat Polibius
   selectTabelPolibius = document.querySelector("#polibius");
   randarePatratPolibius(selectTabelPolibius);
-  //   if (selectTabelPolibius !== null) {
-  //     selectTabelPolibius.innerHTML = "";
-
-  //     // loop randuri
-  //     for (let i = 0; i < patratPolibius.length; i++) {
-  //       const row = document.createElement("tr");
-
-  //       // loop intre coloane pe randul curent
-  //       for (let j = 0; j < patratPolibius[i].length; j++) {
-  //         const cell = document.createElement("td");
-  //         cell.textContent = patratPolibius[i][j];
-  //         row.appendChild(cell);
-  //       }
-
-  //       selectTabelPolibius.appendChild(row);
-  //     }
-  //   }
-
-  console.log(patratPolibius);
 
   // gasim coordonatele fiecarei litere si o criptam
   const criptare = gasesteCoordonate(textInClarSanetizat, patratPolibius);
-  console.log(criptare);
 
   // --- text criptat Polibius ---
   const textCriptatPolibius = textCriptat(criptare);
-  console.log(textCriptatPolibius);
+
   containerTextCriptatPolibius.textContent = textCriptatPolibius;
 
   //explicatii pasi Polibius -- SECTIUNE --
@@ -201,7 +164,6 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
 
   // etapa 5 - criptarea fiecarui caracter
   const containerDateIesire = document.querySelector(".explicatii-polibius");
-  console.log(containerDateIesire);
 
   for (let i = 0; i < textInClarSanetizat.length; i++) {
     containerDateIesire.insertAdjacentHTML(
@@ -222,13 +184,8 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
 
 // apelam addEventListener doar daca btnPolibiusDecripteaza nu e null sau undefined
 btnPolibiusDecripteaza?.addEventListener("click", () => {
-  console.log("click");
-
   cheie = selectDecriptareCheie.value;
   textCriptatDecriptare = selectDecriptareTextCriptat.value;
-
-  console.log(cheie);
-  console.log(textCriptatDecriptare);
 
   if (cheie === "" || textCriptatDecriptare === "") {
     alert("Te rog completeaza campul Cheie si Text criptat");
@@ -239,13 +196,8 @@ btnPolibiusDecripteaza?.addEventListener("click", () => {
   cheieSanetizata = cleanString(cheie);
   textCriptatDecriptareSanetizat = extractNumbers(textCriptatDecriptare);
 
-  console.log(cheieSanetizata);
-  console.log(textCriptatDecriptareSanetizat);
-
   // prelucram cheia pentru a elimina duplicatele si combinam I cu J
   cheiePrelucrata = eliminaDuplicateSiCombinaIJ(cheieSanetizata);
-
-  console.log(cheiePrelucrata);
 
   // din alfabet eliminam toate literele care sunt existente in cheie
   const alfabetFaraCheie = eliminaLitereleDinCheie(
@@ -265,12 +217,6 @@ btnPolibiusDecripteaza?.addEventListener("click", () => {
     textCriptatDecriptareSanetizat,
     patratPolibius
   );
-
-  console.log(patratPolibius);
-
-  console.log("---------");
-  console.log(decriptare.text);
-  console.log(decriptare.coordonate);
 
   // --- text decriptat Polibius ---
   containerTextDecriptatPolibius.textContent = decriptare.text;

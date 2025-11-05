@@ -51,12 +51,6 @@ export const litereAlfabet = [
 // ];
 
 export function eliminaDuplicateSiCombinaIJ(cheie) {
-  //   // Convertim cheia la uppercase
-  //   const upper = cheie.toUpperCase();
-
-  //   // Eliminam orice caracter care nu e litera A-Z
-  //   const doarLitere = upper.replace(/[^A-Z]/g, "");
-
   // Eliminam duplicatele
   const cheieFaraDuplicate = new Set(cheie);
 
@@ -91,8 +85,6 @@ export function eliminaLitereleDinCheie(litereAlfabet, cheiePrelucrata) {
 //   litereAlfabet,
 //   cheiePrelucrata
 // );
-
-// console.log(cheiePrelucrata);
 
 export function construirePatratPolibius(
   cheiePrelucrata,
@@ -207,6 +199,7 @@ export function decripteazaPolibius(textCodat, patrat) {
 
   return { text: textDecriptat, coordonate };
 }
+
 // construirePatratPolibius(cheiePrelucrata, alfabetFaraCheie);
 
 // console.log(patratPolibius);
