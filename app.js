@@ -6,7 +6,7 @@ import {
   construirePatratPolibius,
   gasesteCoordonate,
 } from "./polibius.js";
-import { cleanString, textCriptat } from "./functions.js";
+import { cleanString, textCriptat, extractNumbers } from "./functions.js";
 import { explicatiiPolibius } from "./explicatii.js";
 
 export let cheie = "";
@@ -14,6 +14,8 @@ export let textInClar = "";
 export let cheieSanetizata = "";
 export let textInClarSanetizat = "";
 export let cheiePrelucrata = "";
+export let textCriptatDecriptare = "";
+export let textCriptatDecriptareSanetizat = "";
 
 // POLIBIUS
 let selectTabelPolibius = document.querySelector("#polibius");
@@ -23,6 +25,15 @@ const btnPolibiusCripteaza = document.querySelector("#polibius-cripteaza");
 const containerPolibiusData = document.querySelector(".polibius-data");
 const containerTextCriptatPolibius = document.querySelector(
   ".text-criptat-polibius"
+);
+// decriptare
+const selectDecriptareCheie = document.querySelector("#decriptareCheie");
+const selectDecriptareTextCriptat = document.querySelector(
+  "#decriptareTextClar"
+);
+const btnPolibiusDecripteaza = document.querySelector("#polibiusDripteaza");
+const containerTextDecriptatPolibius = document.querySelector(
+  ".text-decriptat-polibius"
 );
 
 // patrat polibius utilizat in criptare
@@ -203,4 +214,32 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
     [4, "-", "-", "-", "-", "-"],
     [5, "-", "-", "-", "-", "-"],
   ];
+});
+
+// apelam addEventListener doar daca btnPolibiusDecripteaza nu e null sau undefined
+btnPolibiusDecripteaza?.addEventListener("click", () => {
+  console.log("click");
+
+  cheie = selectDecriptareCheie.value;
+  textCriptatDecriptare = selectDecriptareTextCriptat.value;
+
+  console.log(cheie);
+  console.log(textCriptatDecriptare);
+
+  if (cheie === "" || textCriptatDecriptare === "") {
+    alert("Te rog completeaza campul Cheie si Text criptat");
+    return [];
+  }
+
+  // sanetizam datele de intrare sa contina numai litere majuscule
+  cheieSanetizata = cleanString(cheie);
+  textCriptatDecriptareSanetizat = extractNumbers(textCriptatDecriptare);
+
+  console.log(cheieSanetizata);
+  console.log(textCriptatDecriptareSanetizat);
+
+  // prelucram cheia pentru a elimina duplicatele si combinam I cu J
+  cheiePrelucrata = eliminaDuplicateSiCombinaIJ(cheieSanetizata);
+
+  console.log(cheiePrelucrata);
 });

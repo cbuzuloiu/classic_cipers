@@ -4,6 +4,10 @@ export function cleanString(str) {
     .toUpperCase();
 }
 
+export function extractNumbers(str) {
+  return str.replace(/[^1-9]/g, "");
+}
+
 // transofmram un array de arrayuri intr-un string
 export function textCriptat(coordonate) {
   return coordonate.map(([row, col]) => `${row}${col}`).join(" ");
