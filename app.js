@@ -140,11 +140,12 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
   const criptare = gasesteCoordonate(textInClarSanetizat, patratPolibius);
   console.log(criptare);
 
+  // --- text criptat Polibius ---
   const textCriptatPolibius = textCriptat(criptare);
   console.log(textCriptatPolibius);
   containerTextCriptatPolibius.textContent = textCriptatPolibius;
 
-  //explicatii pasi Polibius
+  //explicatii pasi Polibius -- SECTIUNE --
   const explicatiiExistente = document.querySelector(".explicatii");
 
   if (explicatiiExistente) {
