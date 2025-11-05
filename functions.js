@@ -5,7 +5,14 @@ export function cleanString(str) {
 }
 
 export function extractNumbers(str) {
-  return str.replace(/[^1-9]/g, "");
+  let sanitized = str.replace(/[^1-9]/g, "");
+  console.log(sanitized);
+
+  if (sanitized.length % 2 !== 0) {
+    return alert("Te rog introdu grupuri de cate doua cifre");
+  }
+
+  return sanitized;
 }
 
 // transofmram un array de arrayuri intr-un string

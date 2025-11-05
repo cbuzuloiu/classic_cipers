@@ -171,6 +171,42 @@ export function gasesteCoordonate(text, patrat) {
 
   return rezultate;
 }
+
+export function decripteazaPolibius(textCodat, patrat) {
+  const sanitized = textCodat;
+  let textDecriptat = "";
+  const coordonate = [];
+
+  // Procesarea numerelor in pereche
+  for (let k = 0; k < sanitized.length; k += 2) {
+    const rand = String(sanitized[k]);
+    const coloana = String(sanitized[k + 1]);
+    let literaGasita = "";
+
+    // Cautare in patratul Polibius
+    for (let i = 1; i < patrat.length; i++) {
+      if (String(patrat[i][0]) === rand) {
+        for (let j = 1; j < patrat[i].length; j++) {
+          if (String(patrat[0][j]) === coloana) {
+            literaGasita = patrat[i][j];
+            break;
+          }
+        }
+      }
+      if (literaGasita) break;
+    }
+
+    // Pentru I sau J mereu se va afisa J
+    if (literaGasita === "I/J") {
+      literaGasita = "I";
+    }
+
+    textDecriptat += literaGasita;
+    coordonate.push([rand, coloana]);
+  }
+
+  return { text: textDecriptat, coordonate };
+}
 // construirePatratPolibius(cheiePrelucrata, alfabetFaraCheie);
 
 // console.log(patratPolibius);
