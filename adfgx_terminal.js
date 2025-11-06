@@ -332,6 +332,7 @@ console.log("Patrat polibius avand cheia adaugata: ", patratPolibiusADFGX);
 const criptare = gasesteCoordonate(textInClar, patratPolibiusADFGX);
 const criptareArr = flattenArray(criptare);
 
+console.log("Text intermediar: ", criptareArr.join(""));
 // etapa 1 transpozitie
 const etapaIntaiTranspozitie = construirePatratTranspozitie(
   cifruTranspozitiePrelucrat,
@@ -396,7 +397,10 @@ const cifruPolibiusDecriptare = matrixToADFGXString(
   transpozitieEtapa2Decifrare
 );
 
-console.log("Coordonate pentru patratul Polibius: ", cifruPolibiusDecriptare);
+console.log(
+  "Coordonate pentru patratul Polibius (text intermediar): ",
+  cifruPolibiusDecriptare
+);
 
 // Construim patratul polibius utilizant cheia de decriptare
 const alfabetFaraCheieDecriptare = eliminaLitereleDinCheie(
