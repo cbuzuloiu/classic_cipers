@@ -8,7 +8,8 @@ const litereAlfabet = [
   "F",
   "G",
   "H",
-  "I/J",
+  "I",
+  "J",
   "K",
   "L",
   "M",
@@ -28,28 +29,37 @@ const litereAlfabet = [
   "0",
   "1",
   "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
 ];
 
-const patratPolibiusADFGX = [
-  ["0", "A", "D", "F", "G", "X"],
+const patratPolibiusADFGVX = [
+  ["0", "A", "D", "F", "G", "V", "X"],
   ["A", "-", "-", "-", "-", "-"],
   ["D", "-", "-", "-", "-", "-"],
   ["F", "-", "-", "-", "-", "-"],
   ["G", "-", "-", "-", "-", "-"],
+  ["V", "-", "-", "-", "-", "-"],
   ["X", "-", "-", "-", "-", "-"],
 ];
 
-const patratPolibiusADFGXDecriptare = [
-  ["0", "A", "D", "F", "G", "X"],
+const patratPolibiusADFGVXDecriptare = [
+  ["0", "A", "D", "F", "G", "V", "X"],
   ["A", "-", "-", "-", "-", "-"],
   ["D", "-", "-", "-", "-", "-"],
   ["F", "-", "-", "-", "-", "-"],
   ["G", "-", "-", "-", "-", "-"],
+  ["V", "-", "-", "-", "-", "-"],
   ["X", "-", "-", "-", "-", "-"],
 ];
 
-const cheie = "SECRETSIGUR";
-const textInClar = "EXEMPLU";
+const cheie = "SIGUR";
+const textInClar = "EXEMPLU1234";
 const cifruTranspozitie = "TESTARE";
 
 // --- FUNCTII ---
@@ -60,9 +70,9 @@ function eliminaDuplicateSiCombinaIJ(cheie) {
 
   // Convertim in array si combinam I/J
   const rezultat = Array.from(cheieFaraDuplicate).map((litera) => {
-    if (litera === "I" || litera === "J") {
-      return "I/J";
-    }
+    // if (litera === "I" || litera === "J") {
+    //   return "I/J";
+    // }
     return litera;
   });
 
@@ -91,10 +101,10 @@ function construirePatratPolibius(
   let indexAlfabet = 0;
 
   // constructia linilor
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     // console.log(`-- Linia ${i} --`);
     // constructia coloanelor
-    for (let j = 1; j <= 5; j++) {
+    for (let j = 1; j <= 6; j++) {
       if (indexCheie < cheiePrelucrata.length) {
         // console.log(`Coloana ${cheiePrelucrata[indexCheie]}`);
         patratPolibius[i][j] = cheiePrelucrata[indexCheie];
@@ -267,7 +277,26 @@ function matrixToADFGXString(matrix) {
     for (let j = 0; j < matrix[i].length; j++) {
       const letter = matrix[i][j];
       // Pastram doar A, D, F, G, X
-      if (["A", "D", "F", "G", "X"].includes(letter)) {
+      if (
+        [
+          "A",
+          "D",
+          "F",
+          "G",
+          "V",
+          "X",
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+        ].includes(letter)
+      ) {
         result += letter;
       }
     }
@@ -297,7 +326,7 @@ function decripteazaCoordonateADFGX(matrix, coordString) {
       if (letterFound) break;
     }
 
-    if (letterFound === "I/J") letterFound = "I";
+    // if (letterFound === "I/J") letterFound = "I";
 
     result += letterFound;
   }
@@ -306,7 +335,7 @@ function decripteazaCoordonateADFGX(matrix, coordString) {
 }
 
 // --- END FUNCTII ---
-console.log("\n===== ADFGX CRIPTARE =====");
+console.log("\n===== ADFGVX CRIPTARE =====");
 
 // prelucrare chei - eliminam duplicate si literele I si J devin I/J
 const cheiePrelucrata = eliminaDuplicateSiCombinaIJ(cheie);
@@ -326,14 +355,16 @@ const alfabetFaraCheie = eliminaLitereleDinCheie(
 construirePatratPolibius(
   cheiePrelucrata,
   alfabetFaraCheie,
-  patratPolibiusADFGX
+  patratPolibiusADFGVX
 );
 
-console.log("Patrat polibius avand cheia adaugata: ", patratPolibiusADFGX);
+console.log("Patrat polibius avand cheia adaugata: ", patratPolibiusADFGVX);
 
 // gasim coordonatele fiecarei litere si o criptam
-const criptare = gasesteCoordonate(textInClar, patratPolibiusADFGX);
+const criptare = gasesteCoordonate(textInClar, patratPolibiusADFGVX);
 const criptareArr = flattenArray(criptare);
+
+console.log("Text intermediar: ", criptareArr.join(""));
 
 // etapa 1 transpozitie
 const etapaIntaiTranspozitie = construirePatratTranspozitie(
@@ -353,9 +384,36 @@ console.log("Cifrarea textului: ", cifrareaTextului);
 console.log("============================\n");
 
 // --- DECRIPTARE TEXT ---
-console.log("\n===== ADFGX DECRIPTARE =====");
-const cheieDecriptare = "SECRETSIGUR";
-const textCriptat = "FGFDGXAGQXADADF";
+console.log("\n===== ADFGVX DECRIPTARE =====");
+const cheieDecriptare = "SIGUR";
+// const textCriptat = "XGDQDFGVADVQGVDVADFF";
+const textCriptat = [
+  "X",
+  "G",
+  "G",
+  "V",
+  "Q",
+  "G",
+  "F",
+  "F",
+  "V",
+  "A",
+  "D",
+  "A",
+  "V",
+  "X",
+  "Q",
+  "G",
+  "G",
+  "A",
+  "V",
+  "Q",
+  "D",
+  "G",
+  "F",
+  "G",
+  "X",
+].join("");
 const cifruTranspozitieDecriptare = "TESTARE";
 
 // prelucrare chei - eliminam duplicate si literele I si J devin I/J
@@ -410,18 +468,18 @@ const alfabetFaraCheieDecriptare = eliminaLitereleDinCheie(
 construirePatratPolibius(
   cheieDecriptarePrelucrata,
   alfabetFaraCheieDecriptare,
-  patratPolibiusADFGXDecriptare
+  patratPolibiusADFGVXDecriptare
 );
 
 console.log(
   "Construim patratul Polibius utilizat pentru decriptare: ",
-  patratPolibiusADFGXDecriptare
+  patratPolibiusADFGVXDecriptare
 );
 
-const decriptareADFGX = decripteazaCoordonateADFGX(
-  patratPolibiusADFGXDecriptare,
+const decriptareADFGVX = decripteazaCoordonateADFGX(
+  patratPolibiusADFGVXDecriptare,
   cifruPolibiusDecriptare
 );
 
-console.log("Textul decriptat: ", decriptareADFGX);
+console.log("Textul decriptat: ", decriptareADFGVX);
 console.log("============================\n");
