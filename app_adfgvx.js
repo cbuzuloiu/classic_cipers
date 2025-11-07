@@ -1,4 +1,4 @@
-import { cleanString, textCriptat, extractNumbers } from "./functions.js";
+import { cleanStringADFGVX, textCriptat, extractNumbers } from "./functions.js";
 import {
   eliminaDuplicateSiCombinaIJ,
   eliminaLitereleDinCheie,
@@ -14,11 +14,11 @@ import {
   matrixToADFGXString,
   decripteazaCoordonateADFGX,
   sortAlphabetically,
-} from "./adfgx.js";
+} from "./adfgvx.js";
 import {
   explicatiiPolibius,
   explicatiiPolibiusDecriptare,
-} from "./explicatii_adfgx.js";
+} from "./explicatii_adfgvx.js";
 
 export let cheie = "";
 export let textInClar = "";
@@ -76,22 +76,24 @@ const containerTextDecriptatPolibius = document.querySelector(
 
 // patrat polibius utilizat in criptare
 const patratPolibius = [
-  ["0", "A", "D", "F", "G", "X"],
-  ["A", "-", "-", "-", "-", "-"],
-  ["D", "-", "-", "-", "-", "-"],
-  ["F", "-", "-", "-", "-", "-"],
-  ["G", "-", "-", "-", "-", "-"],
-  ["X", "-", "-", "-", "-", "-"],
+  ["0", "A", "D", "F", "G", "V", "X"],
+  ["A", "-", "-", "-", "-", "-", "-"],
+  ["D", "-", "-", "-", "-", "-", "-"],
+  ["F", "-", "-", "-", "-", "-", "-"],
+  ["G", "-", "-", "-", "-", "-", "-"],
+  ["V", "-", "-", "-", "-", "-", "-"],
+  ["X", "-", "-", "-", "-", "-", "-"],
 ];
 
 // patrat polibius utilizat in decriptare
 const patratPolibiusADFGXDecriptare = [
-  ["0", "A", "D", "F", "G", "X"],
-  ["A", "-", "-", "-", "-", "-"],
-  ["D", "-", "-", "-", "-", "-"],
-  ["F", "-", "-", "-", "-", "-"],
-  ["G", "-", "-", "-", "-", "-"],
-  ["X", "-", "-", "-", "-", "-"],
+  ["0", "A", "D", "F", "G", "V", "X"],
+  ["A", "-", "-", "-", "-", "-", "-"],
+  ["D", "-", "-", "-", "-", "-", "-"],
+  ["F", "-", "-", "-", "-", "-", "-"],
+  ["G", "-", "-", "-", "-", "-", "-"],
+  ["V", "-", "-", "-", "-", "-", "-"],
+  ["X", "-", "-", "-", "-", "-", "-"],
 ];
 
 // --- FUNCTII ---
@@ -115,7 +117,6 @@ function randarePatratPolibius(selectTabelPolibius, patrat) {
   }
 }
 // ---
-
 // randarea patratului Polibius fara nici o valoare
 randarePatratPolibius(selectTabelPolibius, patratPolibius);
 
@@ -131,10 +132,11 @@ btnPolibiusCripteaza?.addEventListener("click", () => {
   }
 
   // sanetizam datele de intrare sa contina numai litere majuscule
-  cheieSanetizata = cleanString(cheie);
-  textInClarSanetizat = cleanString(textInClar);
-  cifruTranspozitieSanetizat = cleanString(cifruTranspozitie);
+  cheieSanetizata = cleanStringADFGVX(cheie);
+  textInClarSanetizat = cleanStringADFGVX(textInClar);
+  cifruTranspozitieSanetizat = cleanStringADFGVX(cifruTranspozitie);
 
+  console.log(textInClarSanetizat);
   // prelucram cheia pentru a elimina duplicatele si combinam I cu J
   cheiePrelucrata = eliminaDuplicateSiCombinaIJ(cheieSanetizata);
   cifruTranspozitiePrelucrat = eliminaDuplicateSiCombinaIJ(
@@ -203,9 +205,9 @@ btnPolibiusDecripteaza?.addEventListener("click", () => {
   }
 
   // sanetizam datele de intrare sa contina numai litere majuscule
-  cheieDecriptareSanetizata = cleanString(cheieDecriptare);
-  textCriptatDecriptareSanetizat = cleanString(textCriptatDecriptare);
-  cifruTranspozitieDecriptareSanetizat = cleanString(
+  cheieDecriptareSanetizata = cleanStringADFGVX(cheieDecriptare);
+  textCriptatDecriptareSanetizat = cleanStringADFGVX(textCriptatDecriptare);
+  cifruTranspozitieDecriptareSanetizat = cleanStringADFGVX(
     cifruTranspozitieDecriptare
   );
 

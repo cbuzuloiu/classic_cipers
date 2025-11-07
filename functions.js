@@ -4,6 +4,12 @@ export function cleanString(str) {
     .toUpperCase();
 }
 
+export function cleanStringADFGVX(str) {
+  return str
+    .replace(/[^a-zA-Z0-9]/g, "") // păstrăm doar litere și cifre
+    .toUpperCase();
+}
+
 export function extractNumbers(str) {
   let sanitized = str.replace(/[^1-9]/g, "");
 
